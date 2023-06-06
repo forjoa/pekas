@@ -1,0 +1,47 @@
+.form-class-i {
+    margin-top: 180px;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    font-family: 'Ubuntu';
+}
+
+.form-i {
+    width: 80%;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.form-i input{
+    height: 40px;
+    width: 100%;
+}
+
+.form-i input[type=submit] {
+    cursor: pointer;
+    color: white;
+    background-color: rgba(167, 52, 111, 0.75);
+    border: none;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    font-family: 'Ubuntu';
+}
+
+.form-i input[type=submit]:hover {
+    transform: translateY(-4px) translateX(-2px);
+    box-shadow: 2px 5px 0 0 black;
+}
+
+.lista-usabilidad {
+    list-style: none;
+    display: flex;
+    width: 80%;
+    justify-content: space-evenly;
+}
+
+.lista-usabilidad li a{
+    text-decoration: none;
+    color: black;
+}

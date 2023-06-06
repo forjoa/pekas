@@ -1,0 +1,841 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+/*
+*::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+*::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #fff;
+    border-radius: 20px;
+    border: 3px solid #fff;
+}
+
+*::-webkit-scrollbar-track {
+    background: #fff;
+}
+*/
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Shantell Sans', cursive;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup {
+    font-family: 'Ubuntu';
+    position: fixed;
+    border-radius: 5px;
+    top: 76%;
+    left: 2%;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.popup-ok {
+    cursor: pointer;
+    border: none;
+    background-color: rgb(167, 52, 112);
+    color: white;
+    width: 70px;
+    height: 30px;
+    border-radius: 5px;
+    transition: all 0.3s;
+    font-family: 'Ubuntu';
+}
+
+.popup-info {
+    cursor: pointer;
+    border: none;
+    background-color: grey;
+    color: white;
+    height: 30px;
+    width: 140px;
+    border-radius: 5px;
+    transition: all 0.3s;
+    font-family: 'Ubuntu';
+}
+
+.popup-ok:hover,
+.popup-info:hover {
+    filter: opacity(0.5);
+}
+
+.top-header {
+    height: 30px;
+    width: 100%;
+    background-color: rgba(167, 52, 111, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 20px;
+    padding-right: 50px;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    backdrop-filter: blur(24px);
+}
+
+.nav-bar-general {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    background-color: #FAF8F7;
+    backdrop-filter: blur(24px);
+    position: fixed;
+    top: 30px;
+    border-radius: 5px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    z-index: 2;
+}
+
+
+.navbar-toggle {
+    cursor: pointer;
+    display: none;
+}
+
+.navbar-toggle span {
+    display: block;
+    width: 20px;
+    height: 3px;
+    background-color: #000;
+    margin: 5px 0;
+    transition: transform 0.3s ease-in-out;
+}
+
+.left,
+.right {
+    width: 50%;
+    display: flex;
+}
+
+.icono-carrito {
+    cursor: pointer;
+}
+
+.logo {
+    width: 20%;
+}
+
+.logo img {
+    width: 150px;
+    margin-left: 10%;
+}
+
+.nav-list {
+    display: flex;
+    width: 60%;
+}
+
+.nav-list ul {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-left: 0;
+}
+
+.nav-list ul li {
+    list-style: none;
+    font-size: 18px;
+}
+
+.nav-list ul li a {
+    text-decoration: none;
+    color: rgb(99, 99, 99);
+    transition: all 0.5s;
+}
+
+.nav-list ul li a:hover {
+    color: black;
+}
+
+.right ul li a:hover {
+    color: black;
+}
+
+.right ul {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding-right: 35px;
+    justify-content: right;
+}
+
+.right ul li {
+    list-style: none;
+    font-size: 18px;
+}
+
+.right ul li a {
+    cursor: pointer;
+    text-decoration: none;
+    color: rgb(99, 99, 99);
+    transition: all 0.5s;
+}
+
+
+
+#modal {
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    height: 50%;
+    padding: 20px 0;
+    transition: all 0.2s ease;
+    border-radius: 15px;
+    border: none;
+}
+
+#modal .modal-content {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+}
+
+#modal input {
+    height: 30px;
+    width: 80%;
+    border: 2px solid black;
+    border-radius: 5px;
+    text-indent: 10px;
+}
+
+#modal::backdrop {
+    background-color: rgba(0, 0, 0, .5);
+    filter: blur(1);
+}
+
+#login {
+    background-color: rgb(167, 52, 112);
+    height: 40px;
+    width: 80%;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    border: none;
+    border-radius: 5px;
+    margin-top: 5%;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+}
+
+#login:hover {
+    filter: opacity(0.5);
+}
+
+#registrarse {
+    text-decoration: none;
+    color: gray;
+}
+
+#registrarse:hover {
+    text-decoration: underline;
+}
+
+#cerrar-ventana {
+    color: gray;
+    cursor: pointer;
+}
+
+#cerrar-ventana:hover {
+    text-decoration: underline;
+}
+
+
+
+.numeros {
+    background-color: rgb(167, 52, 112);
+    color: white;
+    display: grid;
+    place-items: center;
+    height: 25px;
+    width: 25px;
+    border-radius: 100px;
+}
+
+.numeros p {
+
+    height: 100%;
+}
+
+.carrusel {
+    top: 30px;
+    position: relative;
+    width: 100%;
+    height: calc(90vh);
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.prev,
+.next {
+    position: absolute;
+    top: 57.5%;
+    transform: translateY(-50%);
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
+
+.contenido-general {
+    top: 100px;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    margin-top: 50px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.contenido {
+    border-radius: 5px;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1%;
+    text-align: center;
+    backdrop-filter: blur(24px);
+}
+
+.texto {
+    padding: 3% 5%;
+}
+
+.texto h2 {
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: 35px;
+}
+
+.texto,
+.imagenes {
+    width: 90%;
+}
+
+.imagenes {
+    padding: 0 5% 3% 5%;
+    color: rgb(167, 52, 112);
+}
+
+#titulo-imgs {
+    color: black;
+    text-align: start;
+    font-size: 35px;
+}
+
+.imagenes img {
+    width: 200px;
+}
+
+.imagenes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.imagenes h2 {
+    font-family: 'Dancing Script', cursive;
+}
+
+.ninia {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: 100px;
+}
+
+.ninio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 100px;
+}
+
+.pa,
+.po {
+    text-align: justify;
+}
+
+.footer {
+    background-color: #FAF8F7;
+    backdrop-filter: blur(24px);
+    display: grid;
+    place-items: center;
+    margin-top: 30px;
+    padding: 30px 0;
+}
+
+.f-general {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    color: rgb(19, 13, 13);
+}
+
+.f1,
+.f2,
+.f3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#contacto-general {
+    margin-top: 100px;
+}
+
+.ubic {
+    padding: 5% 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.ubic-text h2 {
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: 35px;
+}
+
+.ubic iframe {
+    border-radius: 5px;
+}
+
+.contacto {
+    display: flex;
+    padding: 0 5% 3%;
+}
+
+.contacto-info,
+.contacto-form {
+    width: 50%;
+}
+
+.contacto-info h2 {
+    font-family: 'Shantell Sans', cursive;
+}
+
+.contacto-info h3 {
+    font-family: 'Shantell Sans', cursive;
+}
+
+.redes a {
+    text-decoration: none;
+    color: rgb(167, 52, 112);
+    ;
+}
+
+.reder a:visited {
+    color: black;
+}
+
+.contacto-form {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.contacto-form form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contacto-form form h2 {
+    font-family: 'Shantell Sans', cursive;
+}
+
+.contacto-form form button {
+    --bg: #000;
+    --hover-bg: rgb(167, 52, 112);
+    --hover-text: #000;
+    color: #fff;
+    border: 1px solid var(--bg);
+    border-radius: 4px;
+    padding: 0.8em 2em;
+    background: var(--bg);
+    transition: 0.2s;
+}
+
+.contacto-form form button:hover {
+    transform: translate(-0.25rem, -0.25rem);
+    background: var(--hover-bg);
+    box-shadow: 0.25rem 0.25rem var(--bg);
+}
+
+.contacto-form form button:active {
+    transform: translate(0);
+    box-shadow: none;
+}
+
+#carrito {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.productos {
+    margin-left: 100px;
+    margin-right: 100px;
+    font-family: 'Ubuntu', cursive;
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 30px;
+}
+
+.producto {
+    padding: 20px;
+    height: 30rem;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    transition: all 0.3s;
+}
+
+.producto:hover {
+    filter: opacity(0.7);
+}
+
+.precio {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.producto label {
+    margin: 16 0;
+}
+
+.producto img {
+    width: 230px;
+    height: 230px;
+    border-radius: 5px;
+}
+
+.producto button {
+    cursor: pointer;
+    width: 90%;
+    height: 27px;
+    color: white;
+    background-color: rgba(167, 52, 111, 0.75);
+    border: none;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    font-family: 'Ubuntu';
+}
+
+.producto button:hover {
+    transform: translateY(-4px) translateX(-2px);
+    box-shadow: 2px 5px 0 0 black;
+}
+
+.close {
+    cursor: pointer;
+}
+
+.modal-general {
+    border-radius: 5px;
+    border: none;
+    font-family: 'Ubuntu';
+    padding: 30px;
+    gap: 20px;
+    backdrop-filter: blur(10px);
+    background-clip: padding-box;
+}
+
+#boton-comprar {
+    margin-top: 10px;
+    width: 100%;
+    height: 40px;
+    color: white;
+    background-color: rgba(167, 52, 111, 0.75);
+    border: none;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    font-family: 'Ubuntu';
+}
+
+.modal-general button:hover {
+    transform: translateY(-4px) translateX(-2px);
+    box-shadow: 2px 5px 0 0 black;
+}
+
+.cont-total {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cont-total p {
+    margin: 0;
+}
+
+#total {
+    display: block;
+}
+
+#carrito span {
+    width: 100%;
+}
+
+#carrito button {
+    border: none;
+    border-radius: 3px;
+    text-align: end;
+    transition: all 0.3s;
+}
+
+.buscador {
+    margin-top: 205px;
+    margin-bottom: 45px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+}
+
+.buscador-input {
+    width: 80%;
+    height: 25px;
+    border: none;
+    border-bottom: 1px solid #000;
+    box-sizing: border-box;
+    outline: none;
+    font-family: 'Ubuntu'; 
+    font-size: 16px;
+}
+
+.lupa {
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Estilos adicionales para la lupa */
+.lupa::before {
+    content: '\2713';
+    /* Código unicode de la lupa */
+}
+
+
+@media (max-width: 1000px) {
+    .buscador {
+        margin-top: 250px;
+    }
+    #modal {
+        width: 80%;
+        left: 50%;
+    }
+
+    .contenido {
+        width: 90%;
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+
+    .navbar-toggle.active span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .navbar-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .navbar-toggle.active span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .top-header {
+        padding-right: 30px;
+    }
+
+    .nav-bar-general {
+        width: 100%;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .logo {
+        display: grid;
+        place-items: center;
+    }
+
+    .logo img {
+        margin: 0;
+        width: 100px;
+    }
+
+    .left,
+    .right {
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .left {
+        flex-direction: row;
+        justify-content: space-around;
+
+    }
+
+    .nav-list ul,
+    .right ul {
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 0;
+    }
+
+    .nav-list ul {
+        margin: 0;
+    }
+
+    .right ul {
+        padding: 0;
+        gap: 0;
+        margin-top: 0;
+    }
+
+    .numeros {
+        margin-top: 5px;
+    }
+
+    .f-general {
+        flex-direction: column;
+    }
+
+    .imagenes {
+        gap: 0;
+    }
+
+    .ninia,
+    .ninio {
+        gap: 0;
+        flex-direction: column;
+    }
+
+    .productos {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .contacto {
+        flex-direction: column;
+    }
+
+    .contacto-form,
+    .contacto-info {
+        width: 100%;
+    }
+
+    /* Aplica estilos al botón de hamburguesa */
+    .navbar-toggle {
+        display: block;
+    }
+
+    /* Aplica estilos al menú de navegación */
+    .nav-list {
+        padding: 10px 0;
+        text-align: center;
+        display: none;
+    }
+
+    .nav-list ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .nav-list li {
+        margin-bottom: 10px;
+    }
+
+    .nav-list a {
+        display: block;
+        font-size: 18px;
+        color: #333;
+        text-decoration: none;
+    }
+
+    /* Muestra el menú de navegación cuando se hace clic en el botón de hamburguesa */
+    .navbar-toggle.active~.nav-list {
+        display: block;
+    }
+
+    /* Mueve el logo fuera de la hamburguesa */
+    .logo {
+        float: left;
+    }
+
+    .nav-list {
+        width: 40%;
+    }
+}
