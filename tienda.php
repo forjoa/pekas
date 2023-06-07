@@ -5,6 +5,8 @@ if ($conexion->connect_error) {
     die('Error de conexión: ' . $conexion->connect_error);
 }
 
+$busquedasRealizadas = [];
+
 // Verifica si se envió el formulario de búsqueda
 if (isset($_GET['producto-buscar'])) {
     $productoBuscado = $_GET['producto-buscar'];
@@ -25,6 +27,9 @@ if (isset($_GET['producto-buscar'])) {
     } else {
         echo 'No se encontraron resultados.';
     }
+    
+    $busquedasRealizadas[] = $productoBuscado;
+    
 } else {
     // Obtiene todos los productos de la base de datos
     $resultado = $conexion->query('SELECT * FROM productos ORDER BY id DESC');
@@ -33,17 +38,6 @@ if (isset($_GET['producto-buscar'])) {
         $productos[] = $fila;
     }
 }
-
-$busquedasRealizadas = [];
-
-if (isset($_GET['producto-buscar'])) {
-    $busqueda = $_GET['producto-buscar'];
-    $busquedasRealizadas[] = $busqueda;
-    // Resto del código de búsqueda...
-}
-
-$busquedasConcatenadas = implode('/ ', $busquedasRealizadas);
-
 ?>
 
 <html lang="en">
