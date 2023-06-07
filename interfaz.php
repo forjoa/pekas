@@ -59,11 +59,6 @@
                 <div class="logo">
                     <img src="images/log.png">
                 </div>
-                <div class="navbar-toggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
             </div>
             <div class="right">
                 <ul>
@@ -122,6 +117,4 @@
 
     </footer>
 
-
-    <script src="interfaz.js"></script>
 </body>

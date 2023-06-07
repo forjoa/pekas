@@ -5,7 +5,7 @@ if ($conexion->connect_error) {
     die('Error de conexión: ' . $conexion->connect_error);
 }
 
-$resultado = $conexion->query('SELECT * FROM productos ORDER BY id DESC');
+$resultado = $conexion->query('SELECT * FROM productos ORDER BY id ASC');
 $productos = [];
 while ($fila = $resultado->fetch_assoc()) {
     $productos[] = $fila;
@@ -75,11 +75,6 @@ while ($fila = $resultado->fetch_assoc()) {
                 <div class="logo">
                     <img src="images/log.png">
                 </div>
-                <div class="navbar-toggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
             </div>
             <div class="right">
                 <ul>
@@ -95,38 +90,62 @@ while ($fila = $resultado->fetch_assoc()) {
             <li><a href="interfaz_editar.php">Editar contenido</a></li>
             <li><a href="interfaz_eliminar.php">Eliminar producto</a></li>
         </ul>
-        <div class="productos">
-            <?php foreach ($productos as $producto): ?>
-                <div class="producto" data-aos="fade-up">
-                    <h2>
-                        <?php echo $producto['nombre']; ?>
-                    </h2>
-                    <p>
-                        <?php echo $producto['descripcion']; ?>
-                    </p>
-                    <p>
-                        <?php echo $producto['precio']; ?>
-                    </p>
-                </div>
-            <?php endforeach; ?>
+        
+        <h1>Editar contenido</h1>
+
+        <h3>Seleccionar producto por ID</h3>
+
+        <div class="productos-i">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($productos as $producto): ?>
+                        <tr>
+                            <td>
+                                <?php echo $producto['id']; ?>
+                            </td>
+                            <td>
+                                <?php echo $producto['nombre']; ?>
+                            </td>
+                            <td>
+                                <?php echo $producto['descripcion']; ?>
+                            </td>
+                            <td>
+                                <?php echo $producto['precio']; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         </div>
-        <form name="form-name" action="scripts/formulario.php" method="post" enctype="multipart/form-data"
+
+        <form name="form-name" action="scripts/formulario_editar.php" method="post" enctype="multipart/form-data"
             class="form-i">
-            <h2>Editar contenido</h2>
-            <label for="nombre">Nombre del producto:</label>
+            <label for="id">Elige el ID del producto que deseas cambiar:</label>
+            <br>
+            <input type="number" placeholder="Introduzca un ID que exista" id="id" name="id">
+            <br>
+            <label for="nombre">Nuevo nombre del producto:</label>
             <br>
             <input type="text" placeholder="Ej.: Camiseta negra" id="nombre" name="nombre">
             <br>
-            <label for="descripcion">Descripcion del producto:</label>
+            <label for="descripcion">Nueva descripcion del producto:</label>
             <br>
             <input type="text" placeholder="Ej.: Camiseta de color negro con mangas cortas" id="descripcion"
                 name="descripcion">
             <br>
-            <label for="precio">Precio del producto:</label>
+            <label for="precio">Nuevo precio del producto:</label>
             <br>
             <input type="number" placeholder="Ej.: 24.40" id="precio" name="precio">
             <br>
-            <label for="imagen">Imagen del producto:</label>
+            <label for="imagen">Nueva imagen del producto:</label>
             <br>
             <input type="file" id="imagen" name="imagen">
             <br>

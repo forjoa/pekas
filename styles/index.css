@@ -746,7 +746,7 @@ header {
 
     .logo img {
         margin: 0;
-        width: 100px;
+        width: 100%;
     }
 
     .left,

@@ -37,11 +37,49 @@
 .lista-usabilidad {
     list-style: none;
     display: flex;
+    gap: 10px;
     width: 80%;
     justify-content: space-evenly;
 }
 
 .lista-usabilidad li a{
-    text-decoration: none;
+    text-decoration: underline;
     color: black;
+}
+
+h1 {
+    margin: 5px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.productos-i {
+    width: 100%;
+    display: grid;
+    place-items: center;
+    margin-bottom: 25px;
+}
+
+.productos-i table {
+    width: 80%;
+}
+
+@media (max-width: 1000px) {
+    .lista-usabilidad {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding: 0;
+    }
+
+    .form-class-i {
+        margin-top: 150px;
+    }
 }
