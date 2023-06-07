@@ -33,6 +33,17 @@ if (isset($_GET['producto-buscar'])) {
         $productos[] = $fila;
     }
 }
+
+$busquedasRealizadas = [];
+
+if (isset($_GET['producto-buscar'])) {
+    $busqueda = $_GET['producto-buscar'];
+    $busquedasRealizadas[] = $busqueda;
+    // Resto del código de búsqueda...
+}
+
+$busquedasConcatenadas = implode('/ ', $busquedasRealizadas);
+
 ?>
 
 <html lang="en">
@@ -163,12 +174,24 @@ if (isset($_GET['producto-buscar'])) {
 
     <div class="buscador">
         <span style="font-family: 'Ubuntu"> Busca producto: </span>
-        <form method="GET" action="">
+        <form method="GET" action="tienda.php">
+            <?php foreach ($busquedasRealizadas as $busqueda): ?>
+                <input type="hidden" name="producto-buscar" value="<?php echo htmlspecialchars($busqueda); ?>">
+            <?php endforeach; ?>
             <input type="text" class="buscador-input" name="producto-buscar" />
             <span class="lupa" onclick="submitForm()"></span>
         </form>
     </div>
 
+    <?php if (isset($_GET['producto-buscar'])): ?>
+        <div class="migas-de-pan">
+            <a href="tienda.php">Inicio</a> / <span>
+                <?php foreach ($busquedasRealizadas as $busqueda): ?>
+                    <a href="tienda.php?producto-buscar=<?php echo urlencode($busqueda); ?>"><?php echo $busqueda; ?></a> /
+                <?php endforeach; ?>
+            </span>
+        </div>
+    <?php endif; ?>
 
     <div class="productos">
 

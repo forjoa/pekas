@@ -652,7 +652,7 @@ header {
 
 .buscador {
     margin-top: 205px;
-    margin-bottom: 45px;
+    margin-bottom: 20px;
     width: 100%;
     text-align: center;
     position: relative;
@@ -667,7 +667,7 @@ header {
     box-sizing: border-box;
     outline: none;
     font-family: 'Ubuntu'; 
-    font-size: 16px;
+    font-size: 16px; 
 }
 
 .lupa {
@@ -681,6 +681,21 @@ header {
 .lupa::before {
     content: '\2713';
     /* Código unicode de la lupa */
+}
+
+.migas-de-pan {
+    font-family: 'Ubuntu';
+    width: 80%;
+    margin-bottom: 25px;
+    transform: translateX(12%);
+}
+
+.migas-de-pan a{
+    text-decoration: underline;
+}
+
+.migas-de-pan a:visited{
+    color: black;
 }
 
 
