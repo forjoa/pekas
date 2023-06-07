@@ -81,7 +81,7 @@
         </ul>
         <form name="form-name" action="scripts/formulario.php" method="post" enctype="multipart/form-data"
             class="form-i">
-            <h2>Subir contenido</h2>
+            <h2>Eliminar contenido</h2>
             <label for="nombre">Nombre del producto:</label>
             <br>
             <input type="text" placeholder="Ej.: Camiseta negra" id="nombre" name="nombre">

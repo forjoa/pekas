@@ -1,3 +1,19 @@
+<?php
+// Conecta a la base de datos
+$conexion = new mysqli('localhost', 'root', '1234', 'pekasNew');
+if ($conexion->connect_error) {
+    die('Error de conexión: ' . $conexion->connect_error);
+}
+
+$resultado = $conexion->query('SELECT * FROM productos ORDER BY id DESC');
+$productos = [];
+while ($fila = $resultado->fetch_assoc()) {
+    $productos[] = $fila;
+}
+
+?>
+
+
 <html lang="en">
 
 <head>
@@ -79,9 +95,24 @@
             <li><a href="interfaz_editar.php">Editar contenido</a></li>
             <li><a href="interfaz_eliminar.php">Eliminar producto</a></li>
         </ul>
+        <div class="productos">
+            <?php foreach ($productos as $producto): ?>
+                <div class="producto" data-aos="fade-up">
+                    <h2>
+                        <?php echo $producto['nombre']; ?>
+                    </h2>
+                    <p>
+                        <?php echo $producto['descripcion']; ?>
+                    </p>
+                    <p>
+                        <?php echo $producto['precio']; ?>
+                    </p>
+                </div>
+            <?php endforeach; ?>
+        </div>
         <form name="form-name" action="scripts/formulario.php" method="post" enctype="multipart/form-data"
             class="form-i">
-            <h2>Subir contenido</h2>
+            <h2>Editar contenido</h2>
             <label for="nombre">Nombre del producto:</label>
             <br>
             <input type="text" placeholder="Ej.: Camiseta negra" id="nombre" name="nombre">
@@ -122,6 +153,4 @@
 
     </footer>
 
-
-    <script src="interfaz.js"></script>
 </body>
