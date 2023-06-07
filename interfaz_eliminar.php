@@ -1,3 +1,18 @@
+<?php
+// Conecta a la base de datos
+$conexion = new mysqli('localhost', 'root', '1234', 'pekasNew');
+if ($conexion->connect_error) {
+    die('Error de conexión: ' . $conexion->connect_error);
+}
+
+$resultado = $conexion->query('SELECT * FROM productos ORDER BY id ASC');
+$productos = [];
+while ($fila = $resultado->fetch_assoc()) {
+    $productos[] = $fila;
+}
+
+?>
+
 <html lang="en">
 
 <head>
@@ -74,26 +89,48 @@
             <li><a href="interfaz_editar.php">Editar contenido</a></li>
             <li><a href="interfaz_eliminar.php">Eliminar producto</a></li>
         </ul>
-        <form name="form-name" action="scripts/formulario.php" method="post" enctype="multipart/form-data"
+        <h1>Eliminar contenido</h1>
+
+        <h3>Seleccionar producto por ID</h3>
+
+        <div class="productos-i">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($productos as $producto): ?>
+                        <tr>
+                            <td>
+                                <?php echo $producto['id']; ?>
+                            </td>
+                            <td>
+                                <?php echo $producto['nombre']; ?>
+                            </td>
+                            <td>
+                                <?php echo $producto['descripcion']; ?>
+                            </td>
+                            <td>
+                                <?php echo $producto['precio']; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+
+        <form name="form-name" action="scripts/formulario_eliminar.php" method="post" enctype="multipart/form-data"
             class="form-i">
-            <h2>Eliminar contenido</h2>
-            <label for="nombre">Nombre del producto:</label>
+            <label for="id">Elige el ID del producto que deseas eliminar:</label>
             <br>
-            <input type="text" placeholder="Ej.: Camiseta negra" id="nombre" name="nombre">
+            <input type="number" placeholder="Introduzca un ID que exista" id="id" name="id">
             <br>
-            <label for="descripcion">Descripcion del producto:</label>
-            <br>
-            <input type="text" placeholder="Ej.: Camiseta de color negro con mangas cortas" id="descripcion"
-                name="descripcion">
-            <br>
-            <label for="precio">Precio del producto:</label>
-            <br>
-            <input type="number" placeholder="Ej.: 24.40" id="precio" name="precio">
-            <br>
-            <label for="imagen">Imagen del producto:</label>
-            <br>
-            <input type="file" id="imagen" name="imagen">
-            <br>
+            <small style="text-align: left; margin-bottom: 7px; color: grey; font-size: 14px">* Recuerda que una vez eliminado el producto, deberás volver a subirlo si quieres que se visualice de nuevo en tu web </small>
             <input type="submit" value="ENVIAR">
         </form>
     </div>
