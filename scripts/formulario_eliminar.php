@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Obtener los datos del formulario
     $id = $_POST['id'];
 
-    // Verificar si el ID es válido (opcional)
+    // Verificar si el ID es válido 
     if (!is_numeric($id)) {
         echo "El ID proporcionado no es válido.";
         exit;

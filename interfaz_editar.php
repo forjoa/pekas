@@ -90,7 +90,7 @@ while ($fila = $resultado->fetch_assoc()) {
             <li><a href="interfaz_editar.php">Editar contenido</a></li>
             <li><a href="interfaz_eliminar.php">Eliminar producto</a></li>
         </ul>
-        
+
         <h1>Editar contenido</h1>
 
         <h3>Seleccionar producto por ID</h3>
@@ -118,6 +118,7 @@ while ($fila = $resultado->fetch_assoc()) {
                                 <?php echo $producto['descripcion']; ?>
                             </td>
                             <td>
+                                <span>€</span>
                                 <?php echo $producto['precio']; ?>
                             </td>
                         </tr>

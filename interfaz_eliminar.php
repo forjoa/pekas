@@ -116,6 +116,7 @@ while ($fila = $resultado->fetch_assoc()) {
                                 <?php echo $producto['descripcion']; ?>
                             </td>
                             <td>
+                                <span>€</span>
                                 <?php echo $producto['precio']; ?>
                             </td>
                         </tr>
@@ -130,7 +131,8 @@ while ($fila = $resultado->fetch_assoc()) {
             <br>
             <input type="number" placeholder="Introduzca un ID que exista" id="id" name="id">
             <br>
-            <small style="text-align: left; margin-bottom: 7px; color: grey; font-size: 14px">* Recuerda que una vez eliminado el producto, deberás volver a subirlo si quieres que se visualice de nuevo en tu web </small>
+            <small style="text-align: left; margin-bottom: 7px; color: grey; font-size: 14px">* Recuerda que una vez
+                eliminado el producto, deberás volver a subirlo si quieres que se visualice de nuevo en tu web </small>
             <input type="submit" value="ENVIAR">
         </form>
     </div>

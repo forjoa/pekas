@@ -641,6 +641,12 @@ header {
 
 #carrito span {
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#carrito span button {
+    text-align: end;
 }
 
 #carrito button {
