@@ -51,15 +51,4 @@ const preferencias = getCookie("preferencias"); // Obtener el valor de la cookie
 
 console.log(preferencias); // Mostrar el valor de la cookie en la consola
 
-// funcion para el login
-function login() {
-    let usuario = document.getElementById("usuario").value;
-    let contrasenia = document.getElementById("contrasenia").value;
-
-    if (usuario == "joaquin" && contrasenia == "hola") {
-        window.open("interfaz.php");
-    } else {
-        alert("usuario no reconocido");
-    }
-}
 

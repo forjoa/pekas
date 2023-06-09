@@ -153,15 +153,17 @@ if (isset($_GET['producto-buscar'])) {
         </div>
     </header>
 
-    <!--modal para el inicio de sesión-->
+    <!-- Modal para el inicio de sesión -->
     <dialog id="modal">
         <div class="modal-content">
-            <h2>USUARIO</h2>
-            <input type="text" placeholder="Usuario" id="usuario">
-            <h2>CONTRASEÑA</h2>
-            <input type="password" placeholder="Contraseña" id="contrasenia">
-            <button id="login" onclick="login()">Iniciar Sesión</button>
-            <a id="cerrar-ventana">Cerrar ventana</a>
+            <h2>INICIAR SESIÓN</h2>
+            <form action="scripts/procesar_login.php" method="POST" class="modal-content" style="width: 100%">
+                <input type="text" placeholder="Usuario" id="usuario" name="usuario">
+                <input type="password" placeholder="Contraseña" id="contrasenia" name="contrasenia">
+                <button id="login" type="submit">Iniciar Sesión</button>
+            </form>
+            <a id="registrarse" onclick="abrirRegistro()">Registrarse</a>
+            <a id="cerrar-ventana" onclick="cerrarVentana()">Cerrar ventana</a>
         </div>
     </dialog>
 
@@ -184,7 +186,7 @@ if (isset($_GET['producto-buscar'])) {
                         <div id="total">€</div>
                     </strong>
                 </div>
-                <button id="boton-comprar">Comprar</button>
+                <button id="boton-comprar" data-url="scripts/procesar_login.php" onclick="comprar()">Comprar</button>
             </div>
         </div>
     </dialog>
@@ -268,6 +270,7 @@ if (isset($_GET['producto-buscar'])) {
         AOS.init();
     </script>
     <script src="scripts/tienda.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="scripts/main.js"></script>
     <script>
         function submitForm() {

@@ -85,7 +85,6 @@ function mostrarCarrito() {
   calcularTotal();
 }
 
-
 // Función para calcular el total a pagar
 function calcularTotal() {
   total = 0;
@@ -127,6 +126,46 @@ cerrarModal.addEventListener("click", () => {
 });
 
 let productCard = document.querySelector(".producto img");
-  productCard.addEventListener("click", function () {
+productCard.addEventListener("click", function () {
   console.log("hola");
 });
+
+function abrirRegistro() {
+  window.open("registro.html");
+}
+
+function abrir_modal () {
+  const cerrar_modal = document.querySelector(".modal-general");
+  cerrar_modal.close;
+  const modal = document.getElementById("mi-cuenta");
+  modal.showModal;
+}
+
+function comprar() {
+  // Verificar si el usuario ha iniciado sesión
+  if (!sessionStorage.getItem("clienteId")) {
+    abrir_modal();
+  } else {
+    var productoId = obtenerProductoId();
+
+    $.ajax({
+      url: "scripts/procesar_login.php",
+      method: "POST",
+      data: {
+        productoId: productoId,
+        clienteId: sessionStorage.getItem("clienteId"),
+      },
+      success: function (response) {
+        // Procesamiento exitoso del pedido
+        console.log(response);
+
+        // Redirigir al usuario a otra página
+        // window.location.href = "pedido_confirmado.php";
+      },
+      error: function (xhr, status, error) {
+        // Error al procesar el pedido
+        console.error(error);
+      },
+    });
+  }
+}
