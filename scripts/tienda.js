@@ -43,19 +43,25 @@ botonesAgregar.forEach((boton) => {
   });
 });
 
-// Mostrar los productos en el carrito
 function mostrarCarrito() {
   const carritoDiv = document.getElementById("carrito");
   carritoDiv.innerHTML = "";
 
-  // Agrega cada producto al carrito de compras
+  // Recorre cada producto en el carrito
   carrito.forEach((producto, index) => {
+    // Crea el elemento carritoProducto
+    const carritoProducto = document.createElement("div");
+    carritoProducto.classList.add("carrito-producto");
+
+    // Crea y configura los elementos internos de carritoProducto
     const productoDiv = document.createElement("span");
+    const precioDiv = document.createElement("p");
     const equis = document.createElement("button");
     equis.innerText = "✖"; // Símbolo de equis (✖)
 
-    productoDiv.innerText = `${producto.nombre} (Talla: ${producto.talla}) - Precio: €${producto.precio}`;
-    productoDiv.appendChild(equis);
+    productoDiv.innerText = `${producto.nombre} (Talla: ${producto.talla})`;
+    precioDiv.innerText = `€ ${producto.precio}`;
+    precioDiv.appendChild(equis);
 
     // Agrega el evento onClick al botón equis
     equis.addEventListener("click", () => {
@@ -66,13 +72,19 @@ function mostrarCarrito() {
       guardarCarrito();
     });
 
-    carritoDiv.appendChild(productoDiv);
+    // Agrega los elementos al carritoProducto
+    carritoProducto.appendChild(productoDiv);
+    carritoProducto.appendChild(precioDiv);
+
+    // Agrega el carritoProducto al carritoDiv
+    carritoDiv.appendChild(carritoProducto);
   });
 
   // Actualiza la longitud del carrito y el total a pagar
   document.getElementById("feedback-c").innerHTML = carrito.length;
   calcularTotal();
 }
+
 
 // Función para calcular el total a pagar
 function calcularTotal() {
@@ -101,6 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// Abrir pop-up para iniciar sesión
 const abrirModal = document.querySelector("#mi-cuenta");
 const cerrarModal = document.querySelector("#cerrar-ventana");
 const modal = document.querySelector("#modal");
@@ -114,6 +127,6 @@ cerrarModal.addEventListener("click", () => {
 });
 
 let productCard = document.querySelector(".producto img");
-productCard.addEventListener("click", function () {
+  productCard.addEventListener("click", function () {
   console.log("hola");
 });

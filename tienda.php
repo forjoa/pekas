@@ -5,7 +5,23 @@ if ($conexion->connect_error) {
     die('Error de conexión: ' . $conexion->connect_error);
 }
 
-$busquedasRealizadas = [];
+session_start();
+
+// Verificar si el parámetro "borrar_sesion" está presente en la URL
+if (isset($_GET['borrar_sesion']) && $_GET['borrar_sesion'] == 1) {
+    session_destroy();
+    // Redirigir a la página de inicio sin el parámetro "borrar_sesion"
+    header("Location: tienda.php");
+    exit;
+}
+
+// Verifica si existe la variable de sesión para las búsquedas realizadas
+if (!isset($_SESSION['busquedasRealizadas'])) {
+    $_SESSION['busquedasRealizadas'] = []; // Inicializa como un array vacío si no existe
+}
+
+// Obtiene las búsquedas realizadas de la variable de sesión
+$busquedasRealizadas = $_SESSION['busquedasRealizadas'];
 
 // Verifica si se envió el formulario de búsqueda
 if (isset($_GET['producto-buscar'])) {
@@ -27,9 +43,12 @@ if (isset($_GET['producto-buscar'])) {
     } else {
         echo 'No se encontraron resultados.';
     }
-    
+
     $busquedasRealizadas[] = $productoBuscado;
-    
+
+    // Actualizar la variable de sesión con las búsquedas realizadas actualizadas
+    $_SESSION['busquedasRealizadas'] = $busquedasRealizadas;
+
 } else {
     // Obtiene todos los productos de la base de datos
     $resultado = $conexion->query('SELECT * FROM productos ORDER BY id DESC');
@@ -146,12 +165,17 @@ if (isset($_GET['producto-buscar'])) {
         </div>
     </dialog>
 
+    <!--modal para el carrito de la compra-->
     <dialog class="modal-general">
         <div id="carrito-modal" class="modal">
             <div class="modal-content">
                 <span class="close" cursor="pointer">&times;</span>
                 <h2>Carrito de compras</h2>
-                <div id="carrito"></div>
+                <hr>
+                <div id="carrito">
+                    <div id="carrito-producto">
+                    </div>
+                </div>
                 <input type="hidden" id="talla-seleccionada" />
                 <hr>
                 <div class="cont-total">
@@ -179,13 +203,15 @@ if (isset($_GET['producto-buscar'])) {
 
     <?php if (isset($_GET['producto-buscar'])): ?>
         <div class="migas-de-pan">
-            <a href="tienda.php">Inicio</a> / <span>
+            <a href="tienda.php?borrar_sesion=1">Inicio</a>
+            / <span>
                 <?php foreach ($busquedasRealizadas as $busqueda): ?>
                     <a href="tienda.php?producto-buscar=<?php echo urlencode($busqueda); ?>"><?php echo $busqueda; ?></a> /
                 <?php endforeach; ?>
             </span>
         </div>
     <?php endif; ?>
+
 
     <div class="productos">
 
