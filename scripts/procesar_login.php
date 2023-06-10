@@ -10,7 +10,6 @@ $email = $_POST['usuario'];
 $password = $_POST['contrasenia'];
 
 if ($email == 'joaquin' && $password == '1234') {
-    
     header('Location: ../interfaz.php');
 
 } else {

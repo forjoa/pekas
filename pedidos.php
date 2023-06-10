@@ -96,20 +96,21 @@ while ($fila = $resultado_dos->fetch_assoc()) {
             <tbody class="pedido">
                 <?php foreach ($productos as $producto): ?>
                     <tr>
-                        <td class="tres">
+                        <td style="text-align: left;">
                             <img src="<?php echo substr($producto['imagen'], 3); ?>" />
                         </td>
-                        <td class="uno">
+                        <td style="text-align: left;">
                             <h3 style="margin: 0;">
                                 <?php echo $producto['nombre']; ?>
                             </h3>
                         </td>
-                        <td class="dos">
-                            <?php echo $producto['descripcion']; ?>
+                        <td style="text-align: right;">
+                            <?php echo $producto['descripcion'] . ':'; ?>
                         </td>
-                        <td class="cuatro">
-                            <span>€</span>
-                            <?php echo $producto['precio']; ?>
+                        <td style="text-align: right;">
+                            <strong>
+                                <?php echo $producto['precio'] . '€'; ?>
+                            </strong>
                         </td>
                     </tr>
                 <?php endforeach; ?>
