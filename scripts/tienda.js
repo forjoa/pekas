@@ -20,7 +20,6 @@ let carrito = [];
 let total = 0;
 document.getElementById("feedback-c").innerHTML = carrito.length;
 
-// Agrega un event listener a cada botón de "Añadir"
 botonesAgregar.forEach((boton) => {
   boton.addEventListener("click", () => {
     // Obtén el producto correspondiente al botón de "Añadir"
@@ -28,9 +27,10 @@ botonesAgregar.forEach((boton) => {
     const nombre = producto.querySelector("h2").innerText;
     const talla = producto.querySelector('select[name="talla"]').value;
     const precio = producto.querySelector(".precio").innerText;
+    const id = producto.querySelector('.product-id').value;
 
     // Agrega el producto al carrito de compras
-    carrito.push({ nombre, talla, precio });
+    carrito.push({ id, nombre, talla, precio });
 
     total = parseFloat(total) + parseFloat(precio);
 
@@ -71,6 +71,9 @@ function mostrarCarrito() {
       mostrarCarrito();
       guardarCarrito();
     });
+
+    // Establece el atributo de datos 'data-product-id' con el ID del producto
+    carritoProducto.setAttribute("data-product-id", `${producto.id}`);
 
     // Agrega los elementos al carritoProducto
     carritoProducto.appendChild(productoDiv);
@@ -134,38 +137,9 @@ function abrirRegistro() {
   window.open("registro.html");
 }
 
-function abrir_modal () {
+function abrir_modal() {
   const cerrar_modal = document.querySelector(".modal-general");
   cerrar_modal.close;
-  const modal = document.getElementById("mi-cuenta");
+  const modal = document.getElementById("modal");
   modal.showModal;
-}
-
-function comprar() {
-  // Verificar si el usuario ha iniciado sesión
-  if (!sessionStorage.getItem("clienteId")) {
-    abrir_modal();
-  } else {
-    var productoId = obtenerProductoId();
-
-    $.ajax({
-      url: "scripts/procesar_login.php",
-      method: "POST",
-      data: {
-        productoId: productoId,
-        clienteId: sessionStorage.getItem("clienteId"),
-      },
-      success: function (response) {
-        // Procesamiento exitoso del pedido
-        console.log(response);
-
-        // Redirigir al usuario a otra página
-        // window.location.href = "pedido_confirmado.php";
-      },
-      error: function (xhr, status, error) {
-        // Error al procesar el pedido
-        console.error(error);
-      },
-    });
-  }
 }

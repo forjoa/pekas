@@ -29,7 +29,7 @@ if ($email == 'joaquin' && $password == '1234') {
         $_SESSION['clienteId'] = $clienteId;
 
         // Redirigir al usuario al carrito de compras para que pueda continuar con la compra
-        header("Location: carrito.php");
+        header("Location: ../pedidos.php");
         // Mostrar mensaje de registro exitoso al usuario
         $_SESSION['registroExitoso'] = true;
 

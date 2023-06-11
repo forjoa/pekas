@@ -7,6 +7,8 @@ if ($conexion->connect_error) {
 
 session_start();
 
+$clienteId = $_SESSION['clienteId'];
+
 // Verificar si el parámetro "borrar_sesion" está presente en la URL
 if (isset($_GET['borrar_sesion']) && $_GET['borrar_sesion'] == 1) {
     session_destroy();
@@ -57,6 +59,12 @@ if (isset($_GET['producto-buscar'])) {
         $productos[] = $fila;
     }
 }
+
+// Verificar si el carrito de compra no está creado
+if (!isset($_SESSION['carrito'])) {
+    $_SESSION['carrito'] = array();
+}
+
 ?>
 
 <html lang="en">
@@ -79,7 +87,7 @@ if (isset($_GET['producto-buscar'])) {
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/index.css">
-    <title>Pekas | CONTACTO</title>
+    <title>Pekas | TIENDA</title>
 </head>
 
 <body>
@@ -163,7 +171,7 @@ if (isset($_GET['producto-buscar'])) {
                 <button id="login" type="submit">Iniciar Sesión</button>
             </form>
             <a id="registrarse" onclick="abrirRegistro()">Registrarse</a>
-            <a id="cerrar-ventana" onclick="cerrarVentana()">Cerrar ventana</a>
+            <a id="cerrar-ventana">Cerrar ventana</a>
         </div>
     </dialog>
 
@@ -175,22 +183,40 @@ if (isset($_GET['producto-buscar'])) {
                 <h2>Carrito de compras</h2>
                 <hr>
                 <div id="carrito">
-                    <div id="carrito-producto">
+                    <?php
+                    
+                    // Verificar si hay una sesión activa y los productos en el carrito
+                    if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
+                        // Obtener los productos del carrito y mostrarlos
+                        foreach ($_SESSION['carrito'] as $producto) {
+                            echo '<div class="carrito-producto" data-product-id="' . $producto['id'] . '">';
+                            echo $producto['nombre'];
+                            echo '</div>';
+
+                            // Agregar un campo oculto con el ID del producto
+                            echo '<input type="hidden" name="productos[]" value="' . $producto['id'] . '">';
+                        }
+                        
+                    } else {
+                        echo "<p>No hay productos en el carrito.</p>";
+                    }
+                    
+                    ?>
+                </div>
+                <form method="POST" action="iniciar_sesion.php"> 
+                    <input type="hidden" id="talla-seleccionada" />
+                    <hr>
+                    <div class="cont-total">
+                        <p>Total: </p>
+                        <strong>
+                            <div id="total">€</div>
+                        </strong>
                     </div>
-                </div>
-                <input type="hidden" id="talla-seleccionada" />
-                <hr>
-                <div class="cont-total">
-                    <p>Total: </p>
-                    <strong>
-                        <div id="total">€</div>
-                    </strong>
-                </div>
-                <button id="boton-comprar" data-url="scripts/procesar_login.php" onclick="comprar()">Comprar</button>
+                    <button id="boton-comprar" name="comprar">Comprar</button>
+                </form>
             </div>
         </div>
     </dialog>
-
 
     <div class="buscador">
         <span style="font-family: 'Ubuntu"> Busca producto: </span>
@@ -219,6 +245,7 @@ if (isset($_GET['producto-buscar'])) {
 
         <?php foreach ($productos as $producto): ?>
             <div class="producto" data-aos="fade-up">
+                <input class="product-id" type="hidden" value="<?php echo $producto['id'] ?>"> </input>
                 <img src="<?php echo substr($producto['imagen'], 3); ?>" alt="">
                 <h2>
                     <?php echo $producto['nombre']; ?>
