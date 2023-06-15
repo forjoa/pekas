@@ -7,16 +7,6 @@ if ($conexion->connect_error) {
 
 session_start();
 
-$clienteId = $_SESSION['clienteId'];
-
-// Verificar si el parámetro "borrar_sesion" está presente en la URL
-if (isset($_GET['borrar_sesion']) && $_GET['borrar_sesion'] == 1) {
-    session_destroy();
-    // Redirigir a la página de inicio sin el parámetro "borrar_sesion"
-    header("Location: tienda.php");
-    exit;
-}
-
 // Verifica si existe la variable de sesión para las búsquedas realizadas
 if (!isset($_SESSION['busquedasRealizadas'])) {
     $_SESSION['busquedasRealizadas'] = []; // Inicializa como un array vacío si no existe
@@ -59,12 +49,6 @@ if (isset($_GET['producto-buscar'])) {
         $productos[] = $fila;
     }
 }
-
-// Verificar si el carrito de compra no está creado
-if (!isset($_SESSION['carrito'])) {
-    $_SESSION['carrito'] = array();
-}
-
 ?>
 
 <html lang="en">
@@ -167,7 +151,7 @@ if (!isset($_SESSION['carrito'])) {
             <h2>INICIAR SESIÓN</h2>
             <form action="scripts/procesar_login.php" method="POST" class="modal-content" style="width: 100%">
                 <input type="text" placeholder="Usuario" id="usuario" name="usuario">
-                <input type="password" placeholder="Contraseña" id="contrasenia" name="contrasenia">
+                <input type="password" placeholder="Contraseña" id="contrasenia" name="contrasenia"> 
                 <button id="login" type="submit">Iniciar Sesión</button>
             </form>
             <a id="registrarse" onclick="abrirRegistro()">Registrarse</a>
@@ -175,7 +159,7 @@ if (!isset($_SESSION['carrito'])) {
         </div>
     </dialog>
 
-    <!--modal para el carrito de la compra-->
+    <!-- Modal para el carrito de la compra -->
     <dialog class="modal-general">
         <div id="carrito-modal" class="modal">
             <div class="modal-content">
@@ -183,25 +167,6 @@ if (!isset($_SESSION['carrito'])) {
                 <h2>Carrito de compras</h2>
                 <hr>
                 <div id="carrito">
-                    <?php
-                    
-                    // Verificar si hay una sesión activa y los productos en el carrito
-                    if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
-                        // Obtener los productos del carrito y mostrarlos
-                        foreach ($_SESSION['carrito'] as $producto) {
-                            echo '<div class="carrito-producto" data-product-id="' . $producto['id'] . '">';
-                            echo $producto['nombre'];
-                            echo '</div>';
-
-                            // Agregar un campo oculto con el ID del producto
-                            echo '<input type="hidden" name="productos[]" value="' . $producto['id'] . '">';
-                        }
-                        
-                    } else {
-                        echo "<p>No hay productos en el carrito.</p>";
-                    }
-                    
-                    ?>
                 </div>
                 <form method="POST" action="iniciar_sesion.php"> 
                     <input type="hidden" id="talla-seleccionada" />

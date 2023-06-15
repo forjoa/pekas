@@ -1,19 +1,3 @@
-<?php
-session_start(); 
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $correo = $_POST['correo'];
-    $pwd = $_POST['contrasenia'];
-
-    // Verificar si hay una sesión activa y los productos en el carrito
-    if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
-        // Agregar los IDs de los productos al formulario
-        foreach ($_SESSION['carrito'] as $producto) {
-            echo '<input type="hidden" name="productos[]" value="' . $producto['id'] . '">';
-        }
-    }
-}
-?>
 <html lang="en">
 
 <head>
@@ -89,14 +73,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <form action="scripts/procesar_compra.php" method="POST">
                 <input type="text" placeholder="Correo" id="correo" name="correo">
                 <input type="password" placeholder="Contraseña" id="contrasenia" name="contrasenia">
+                <input type="hidden" value="tienda" name="previous_page"/>
                 <button id="iniciar" type="submit">Iniciar Sesión</button>
-                <!-- Agregar el campo oculto para los IDs de los productos -->
-                <?php
-                foreach ($_SESSION['carrito'] as $producto) {
-                    echo '<input type="hidden" name="productos[]" value="' . $producto['id'] . '">';
-                    echo '<p> '. $producto['id'] . '</p>';
-                }
-                ?>
+               
             </form>
         </div>
     </div>

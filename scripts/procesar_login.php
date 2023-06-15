@@ -24,14 +24,8 @@ if ($email == 'joaquin' && $password == '1234') {
         $fila = $resultado->fetch_assoc();
         $clienteId = $fila['id'];
 
-        // Guardar el ID del cliente en una variable de sesión para su uso posterior
-        session_start();
-        $_SESSION['clienteId'] = $clienteId;
-
         // Redirigir al usuario al carrito de compras para que pueda continuar con la compra
-        header("Location: ../pedidos.php");
-        // Mostrar mensaje de registro exitoso al usuario
-        $_SESSION['registroExitoso'] = true;
+        header("Location: ../pedidos.php?clienteId=$clienteId");
 
         exit();
     } else {

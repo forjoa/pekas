@@ -4,34 +4,61 @@ if ($conexion->connect_error) {
     die('Error de conexión: ' . $conexion->connect_error);
 }
 
-session_start();
+$cliente_id = '';
 
-// Verificar si el carrito de compra está creado y no está vacío
-if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
-    // Obtener los ID de los productos del carrito
-    $id_productos = $_SESSION['carrito'];
-} else {
-    echo 'no existe una puta mierda';
-}
-
-// Guardar las variables
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $correo = $_POST['correo'];
     $pwd = $_POST['contrasenia'];
+    $previous_page = $_POST['previous_page'];
 
-    $productos = $_POST['productos'];
+    if ($previous_page == 'tienda') {
 
-    $query_user = "SELECT id FROM clientes WHERE email = '$correo' AND pwd = '$pwd'";
-    
-    $result = $conexion->query($query_user);
+        $query_user = "SELECT id FROM clientes WHERE email = '$correo' AND pwd = '$pwd'";
 
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()){
-            echo $row['id'];
+        $result = $conexion->query($query_user);
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo $row['id'];
+                $cliente_id = $row['id'];
+            }
+            header("Location: ./carrito.php/".$cliente_id);
+        } else {
+            echo 'Esta cuenta no existe en nuestra base de datos';
         }
     } else {
-        echo 'Esta cuenta no existe en nuestra base de datos';
+
+        $carro = $_POST['carro'];
+        $data = json_decode($carro, true);
+        $cliente_id = json_decode($_POST['idCliente'], true);
+        //Guardado del carrito en base de datos
+        echo $data;
+        print_r($data);
+        print_r($cliente_id);
+        
+        echo $cliente_id;
+        foreach ($data as $producto) {
+            $id = $producto['id'];
+            $query_insert_pedidos = "INSERT INTO pedidos (id_producto, id_cliente) VALUES (?, ?)";
+            $stmt = $conexion->prepare($query_insert_pedidos);
+            $stmt->bind_param('ii', $id, $cliente_id);
+            $stmt->execute();
+            $stmt->close();
+            if ($stmt) {
+                echo "bien insertado";
+                print_r("bien");
+            } else {
+                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                print_r("Error: " . $sql . "<br>" . mysqli_error($conn));
+            }
+        }
+
     }
+
+
 }
+
+
+
 
 ?>

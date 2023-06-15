@@ -1,4 +1,4 @@
-// Al cargar la página, verifica si hay información guardada en el almacenamiento local y recupérala
+// Al cargar la página, verifica si hay información guardada en el almacenamiento local 
 window.addEventListener("load", () => {
   if (localStorage.getItem("carrito")) {
     carrito = JSON.parse(localStorage.getItem("carrito"));

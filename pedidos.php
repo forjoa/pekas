@@ -5,13 +5,15 @@ if ($conexion->connect_error) {
     die('Error de conexión: ' . $conexion->connect_error);
 }
 
-$resultado = $conexion->query('SELECT * FROM productos WHERE id IN (SELECT id_producto FROM pedidos WHERE id_cliente = 2)');
+$clienteId = $_GET['clienteId'];
+
+$resultado = $conexion->query("SELECT * FROM productos WHERE id IN (SELECT id_producto FROM pedidos WHERE id_cliente = '$clienteId')");
 $productos = [];
 while ($fila = $resultado->fetch_assoc()) {
     $productos[] = $fila;
 }
 
-$resultado_dos = $conexion->query('SELECT nombre FROM clientes WHERE id = 2');
+$resultado_dos = $conexion->query("SELECT nombre FROM clientes WHERE id = '$clienteId'");
 $nombre_user = "";
 while ($fila = $resultado_dos->fetch_assoc()) {
     $nombre_user = $fila['nombre'];
