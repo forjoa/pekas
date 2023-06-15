@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
 /*
 *::-webkit-scrollbar {
@@ -831,6 +832,40 @@ header {
 .iniciar-sesion form button:hover {
     transform: translateY(-4px) translateX(-2px);
     box-shadow: 2px 5px 0 0 black;
+}
+
+.compra-confirmada {
+    margin-top: 180px;
+    height: 52%;
+    font-family: 'Ubuntu', cursive;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+
+    & h2 {
+        margin-bottom: 0;
+        text-align: center;
+    }
+
+    & p {
+        text-align: center;
+    }
+
+    & input {
+        width: 50%;
+        height: 40px;
+        border-radius: 10px;
+        background-color: rgba(167, 52, 111, 0.75);
+        border: none;
+        color: white;
+        font-family: 'Ubuntu';
+        transition: all 0.2s;
+    }
+
+    & input:hover {
+        transform: translateY(-4px) translateX(-2px);
+        box-shadow: 2px 5px 0 0 black;
+    }
 }
 
 @media (max-width: 1000px) {
