@@ -5,12 +5,6 @@ if ($conexion->connect_error) {
     die('Error de conexión: ' . $conexion->connect_error);
 }
 
-$resultado = $conexion->query('SELECT * FROM productos ORDER BY id ASC');
-$productos = [];
-while ($fila = $resultado->fetch_assoc()) {
-    $productos[] = $fila;
-}
-
 ?>
 
 <html lang="en">
@@ -92,50 +86,8 @@ while ($fila = $resultado->fetch_assoc()) {
         </ul>
         <h1>Eliminar contenido</h1>
 
-        <h3>Seleccionar producto por ID</h3>
-
         <div class="productos-i">
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>Precio</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($productos as $producto): ?>
-                        <tr>
-                            <td>
-                                <?php echo $producto['id']; ?>
-                            </td>
-                            <td>
-                                <?php echo $producto['nombre']; ?>
-                            </td>
-                            <td>
-                                <?php echo $producto['descripcion']; ?>
-                            </td>
-                            <td>
-                                <span>€</span>
-                                <?php echo $producto['precio']; ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
         </div>
-
-        <form name="form-name" action="scripts/formulario_eliminar.php" method="post" enctype="multipart/form-data"
-            class="form-i">
-            <label for="id">Elige el ID del producto que deseas eliminar:</label>
-            <br>
-            <input type="number" placeholder="Introduzca un ID que exista" id="id" name="id">
-            <br>
-            <small style="text-align: left; margin-bottom: 7px; color: grey; font-size: 14px">* Recuerda que una vez
-                eliminado el producto, deberás volver a subirlo si quieres que se visualice de nuevo en tu web </small>
-            <input type="submit" value="ENVIAR">
-        </form>
     </div>
 
     <footer class="footer">

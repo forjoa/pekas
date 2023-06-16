@@ -89,6 +89,7 @@ while ($fila = $resultado->fetch_assoc()) {
             <li><a href="interfaz.php">Subir contenido</a></li>
             <li><a href="interfaz_editar.php">Editar contenido</a></li>
             <li><a href="interfaz_eliminar.php">Eliminar producto</a></li>
+            <li><a href="interfaz_pedidos.php">Pedidos</a></li>
         </ul>
 
         <h1>Editar contenido</h1>

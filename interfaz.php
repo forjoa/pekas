@@ -73,6 +73,7 @@
             <li><a href="interfaz.php">Subir contenido</a></li>
             <li><a href="interfaz_editar.php">Editar contenido</a></li>
             <li><a href="interfaz_eliminar.php">Eliminar producto</a></li>
+            <li><a href="interfaz_pedidos.php">Pedidos</a></li>
         </ul>
         <form name="form-name" action="scripts/formulario.php" method="post" enctype="multipart/form-data"
             class="form-i">
