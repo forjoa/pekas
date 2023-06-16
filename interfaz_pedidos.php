@@ -84,7 +84,7 @@ if ($conexion->connect_error) {
             <li><a href="interfaz_eliminar.php">Eliminar producto</a></li>
             <li><a href="interfaz_pedidos.php">Pedidos</a></li>
         </ul>
-        <h1>Eliminar contenido</h1>
+        <h1>Peidos que te han realizado: </h1>
 
         <div class="productos-i">
         </div>
