@@ -35,7 +35,7 @@ while ($fila = $resultado->fetch_assoc()) {
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/interfaz.css">
-    <title>Interfaz Usuarios</title>
+    <title>Panel de Control | Editar productos</title>
 </head>
 
 <body>
