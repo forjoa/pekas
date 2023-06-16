@@ -29,6 +29,52 @@ if ($conexion->connect_error) {
     <link rel="stylesheet" href="styles/index.css">
     <link rel="stylesheet" href="styles/interfaz.css">
     <title>Panel de Control | Pedidos</title>
+    <style>
+        .pedido-int {
+            width: 860px;
+            display: flex;
+            margin-bottom: 20px;
+            border: 1px solid grey;
+            border-radius: 10px;
+            padding: 15px;
+            gap: 10px;
+        }
+
+        .cliente {
+            flex: 1;
+        }
+
+        .producto-int {
+            flex: 1;
+        }
+
+        .pedido-int h3 {
+            margin: 0;
+        }
+
+        .cliente ul,
+        .producto-int ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 0;
+        }
+
+        .cliente ul li,
+        .producto-int ul li {
+            margin-bottom: 10px;
+        }
+
+        .btn-mail {
+            display: block;
+            margin-top: 10px;
+            background-color: #f5f5f5;
+            color: #333;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
@@ -86,7 +132,65 @@ if ($conexion->connect_error) {
         </ul>
         <h1>Pedidos que te han realizado: </h1>
 
+
         <div class="productos-i">
+            <?php
+            // Conecta a la base de datos
+            $conexion = new mysqli('localhost', 'root', '1234', 'pekasNew');
+            if ($conexion->connect_error) {
+                die('Error de conexión: ' . $conexion->connect_error);
+            }
+
+            // Realiza la consulta
+            $consulta = "SELECT DISTINCT pedidos.id AS pedido_id,
+                        clientes.id AS cliente_id,
+                        clientes.nombre AS cliente_nombre,
+                        clientes.apellidos AS cliente_apellidos,
+                        clientes.num_telefono AS cliente_telefono,
+                        clientes.email AS cliente_email,
+                        clientes.direccion AS cliente_direccion,
+                        productos.id AS producto_id,
+                        productos.nombre AS producto_nombre,
+                        productos.descripcion AS producto_descripcion,
+                        productos.precio AS producto_precio,
+                        productos.imagen AS producto_imagen
+                FROM pedidos
+                JOIN clientes ON pedidos.id_cliente = clientes.id
+                JOIN productos ON pedidos.id_producto = productos.id";
+            $resultado = $conexion->query($consulta);
+
+            // Muestra los resultados
+            if ($resultado->num_rows > 0) {
+                while ($fila = $resultado->fetch_assoc()) {
+                    echo "<div class='pedido-int'>";
+                    echo "<h3>Pedido Num: " . $fila['pedido_id'] . "</h3>";
+                    echo "<div class='cliente'>";
+                    echo "<ul>";
+                    echo "<li>Cliente ID: " . $fila['cliente_id'] . "</li>";
+                    echo "<li>Nombre y apellido: " . $fila['cliente_nombre'] . " " . $fila['cliente_apellidos'] . "</li>";
+                    echo "<li>Teléfono: " . $fila['cliente_telefono'] . "</li>";
+                    echo "<li>Email: " . $fila['cliente_email'] . "</li>";
+                    echo "<li>Dirección: " . $fila['cliente_direccion'] . "</li>";
+                    echo "</ul>";
+                    echo "</div>";
+                    echo "<div class='producto-int'>";
+                    echo "<ul>";
+                    echo "<li>Producto ID: " . $fila['producto_id'] . "</li>";
+                    echo "<li>Producto Nombre: " . $fila['producto_nombre'] . "</li>";
+                    echo "<li>Producto Descripción: " . $fila['producto_descripcion'] . "</li>";
+                    echo "<li>Producto Precio: " . $fila['producto_precio'] . "</li>";
+                    echo "</ul>";
+                    echo "<a class='btn-mail' href='mailto:" . $fila['cliente_email'] . "' target='_blank'>Enviar correo</a>";
+                    echo "</div>";
+                    echo "</div>";
+                }
+            } else {
+                echo "<p>No hay pedidos disponibles</p>";
+            }
+
+            // Cierra la conexión a la base de datos
+            $conexion->close();
+            ?>
         </div>
     </div>
 
